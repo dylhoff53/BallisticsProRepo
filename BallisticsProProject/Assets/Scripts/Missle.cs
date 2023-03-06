@@ -9,11 +9,10 @@ public class Missle : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "Enemy")
+        Destroy(thing);
+        if(collision.collider.tag == "Boss")
         {
-            thing.SetActive(false);
-            Destroy(thing);
+            collision.collider.GetComponent<Boss>().LossHP();
         }
-
     }
 }

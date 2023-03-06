@@ -7,14 +7,16 @@ public class PlayerController : MonoBehaviour
 
     public Rigidbody rig;
     public float moveSpeed;
-    public 
+    public Launcher launcher;
+    public float lastShootTime;
+    public float shootRate;
 
     void Update()
     {
         Move();
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
+            launcher.Fire();
         }
     }
 

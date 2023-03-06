@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,37 +5,40 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject block;
-    public float count = 1;
+    public float count = 1f;
     public int numbOfBlocks = 0;
     public float funny;
     public Transform first;
     public Vector3 nextDrop;
     public bool noCords = true;
+    public List<GameObject> targets;
+    public float enemySpawnCount = 1;
+    public GameObject Enemy;
+    public int numberofEnemies;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        targets = new List<GameObject>();
     }
-
     // Update is called once per frame
     void Update()
     {
         BlockCountdown();
+     // EnemySpawning();
     }
 
     public void BlockCountdown()
     {
-        if(count > 0)
+        if(count > 0f)
         {
             count -= funny * Time.deltaTime * 4;
-        } else if( count == 0.5 || count < .5 && noCords == true)
+        } else if( count == 0.5f || count < .5f && noCords == true)
         {
             noCords = false;
-            nextDrop = new Vector3(Random(0,6), 3, Random(0, 6));
-        } else if(count == 0 || count < 0)
+            nextDrop = new Vector3(Random.Range(0,6), 3, Random.Range(0, 6));
+        } else if(count == 0f || count < 0f)
         {
-            count = 1;
+            count = 1f;
             if(numbOfBlocks == 0)
             {
                 numbOfBlocks++;
@@ -51,8 +53,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private float Random(int v1, int v2)
+ /*   public void EnemySpawning()
     {
-        throw new NotImplementedException();
+        if(enemySpawnCount > 0)
+        {
+            enemySpawnCount -= funny * Time.deltaTime * 8;
+        } else
+        {
+            SpawnEnemy();
+            enemySpawnCount = 1f;
+        }
     }
+
+    public void SpawnEnemy()
+    {
+        GameObject enemy = Instantiate(Enemy, new Vector3(10f, 0.5f, Random.Range(-1,2)),  Quaternion.identity);
+        while(targets[numberofEnemies] != null)
+        {
+            numberofEnemies++;
+        }
+        targets[numberofEnemies] = enemy;
+        numberofEnemies = 0;
+    } */
 }
